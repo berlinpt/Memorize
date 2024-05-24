@@ -20,15 +20,15 @@ struct EmojiMemoryGameView: View {
     
     var body: some View {
         VStack {
-            cards.foregroundColor(viewModel.color)
             HStack {
                 score
                 Spacer()
-                deck.foregroundColor(viewModel.color)
-                Spacer()
                 shuffle
-                
             }.font(.largeTitle)
+            cards.foregroundColor(viewModel.color)
+            HStack {
+                deck.foregroundColor(viewModel.color)
+            }
            
         }.padding()
     }
@@ -36,14 +36,19 @@ struct EmojiMemoryGameView: View {
     private var score: some View {
         Text("Score: \(viewModel.score)")
             .animation(nil)
+            .font(Font.custom("Impact", size: 30))
+            .foregroundColor(.gray)
+            
     }
     
     private var shuffle: some View {
-        Button("Shuffle") {
+        Button("Shuffle", systemImage: "shuffle.circle") {
             withAnimation {
                 viewModel.shuffle()
             }
         }
+        .font(Font.custom("", size: 40))
+        .labelStyle(.iconOnly)
     }
     
     private var cards: some View {
